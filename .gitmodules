@@ -1,0 +1,3 @@
+[submodule "themes/burrito"]
+	path = themes/burrito
+	url = https://github.com/fly/burrito.git
