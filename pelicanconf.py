@@ -35,16 +35,19 @@ RELATIVE_URLS = True
 PATH = 'content'
 OUTPUT_PATH = 'output'
 PLUGIN_PATH = 'plugins'
-PLUGINS = ['assets']
+PLUGINS = ['assets','pelican-ipynb']
 THEME = 'themes/burrito'
 WEBASSETS = True
+
+MARKUP = ('md','pelican-ipynb')
 
 NATURALISTS = ['digitalvapor','star_bit']
 
 PAGE_URL = '{slug}.html'
 PAGE_SAVE_AS = '{slug}.html'
 
-OUTPUT_RETENTION = ("keybase.txt")
+OUTPUT_RETENTION = (".git")
+ARTICLE_EXCLUDES = ['.ipynb_checkpoints']
 
 DEFAULT_DATE_FORMAT = ('%Y-%m-%d')
 

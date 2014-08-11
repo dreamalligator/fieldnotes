@@ -1,3 +1,6 @@
 [submodule "themes/burrito"]
 	path = themes/burrito
 	url = https://github.com/fly/burrito.git
+[submodule "plugins/pelican-ipynb"]
+	path = plugins/pelican-ipynb
+	url = https://github.com/danielfrg/pelican-ipynb.git

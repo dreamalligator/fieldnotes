@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<head>
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+   
+   
+   
+   
+
+
+<style>
+
+#map {
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+}
+
+</style>
+</head>
+<body>
+
+        <div id="map" style="width: 960px; height: 500px"></div>
+
+<script>
+
+
+
+var map = L.map('map').setView([37.80791308, -122.15919676], 14);
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: 'Map data (c) <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+
+var marker_1 = L.marker([37.80791308, -122.15919676]);
+marker_1.bindPopup("kingdom Plantae");
+map.addLayer(marker_1)
+
+var marker_2 = L.marker([37.80899949, -122.16065087]);
+marker_2.bindPopup("species Trametes versicolor");
+map.addLayer(marker_2)
+
+var marker_3 = L.marker([37.81227659, -122.16390046]);
+marker_3.bindPopup("species Daldinia concentrica");
+map.addLayer(marker_3)
+
+var marker_4 = L.marker([37.8115605, -122.1675975]);
+marker_4.bindPopup("genus Sequoia");
+map.addLayer(marker_4)
+
+var marker_5 = L.marker([37.81485911, -122.16388486]);
+marker_5.bindPopup("kingdom Plantae");
+map.addLayer(marker_5)
+
+var marker_6 = L.marker([37.80934613, -122.16929625]);
+marker_6.bindPopup("kingdom Plantae");
+map.addLayer(marker_6)
+
+var marker_7 = L.marker([37.81461048, -122.17941475]);
+marker_7.bindPopup("genus Equisetum");
+map.addLayer(marker_7)
+
+var marker_8 = L.marker([37.81244183, -122.18101098]);
+marker_8.bindPopup("species Daldinia concentrica");
+map.addLayer(marker_8)
+
+var marker_9 = L.marker([37.81246302, -122.18138613]);
+marker_9.bindPopup("kingdom Fungi");
+map.addLayer(marker_9)
+
+var marker_10 = L.marker([37.81009286, -122.18207344]);
+marker_10.bindPopup("species Toxicodendron diversilobum");
+map.addLayer(marker_10)
+
+var marker_11 = L.marker([37.81004987, -122.18207772]);
+marker_11.bindPopup("species Rubus allegheniensis");
+map.addLayer(marker_11)
+
+var marker_12 = L.marker([37.76250914, -122.4639742]);
+marker_12.bindPopup("kingdom Plantae");
+map.addLayer(marker_12)
+
+var marker_13 = L.marker([37.75917381, -122.46370147]);
+marker_13.bindPopup("kingdom Plantae");
+map.addLayer(marker_13)
+
+var marker_14 = L.marker([37.75911187, -122.46373992]);
+marker_14.bindPopup("species Leonotis leonurus");
+map.addLayer(marker_14)
+
+var marker_15 = L.marker([37.75904009, -122.4636808]);
+marker_15.bindPopup("species Passiflora coccinea");
+map.addLayer(marker_15)
+
+var marker_16 = L.marker([37.75894045, -122.46357502]);
+marker_16.bindPopup("kingdom Plantae");
+map.addLayer(marker_16)
+
+var marker_17 = L.marker([37.75714484, -122.46059768]);
+marker_17.bindPopup("kingdom Fungi");
+map.addLayer(marker_17)
+
+var marker_18 = L.marker([37.75714644, -122.46059653]);
+marker_18.bindPopup("kingdom Plantae");
+map.addLayer(marker_18)
+
+var marker_19 = L.marker([37.75714689, -122.46059214]);
+marker_19.bindPopup("kingdom Plantae");
+map.addLayer(marker_19)
+
+var marker_20 = L.marker([37.75714653, -122.46057344]);
+marker_20.bindPopup("species Vinca major");
+map.addLayer(marker_20)
+
+var marker_21 = L.marker([37.75713744, -122.46003216]);
+marker_21.bindPopup("kingdom Plantae");
+map.addLayer(marker_21)
+
+var marker_22 = L.marker([37.75815047, -122.46008505]);
+marker_22.bindPopup("kingdom Fungi");
+map.addLayer(marker_22)
+
+var marker_23 = L.marker([37.75812609, -122.45987748]);
+marker_23.bindPopup("kingdom Fungi");
+map.addLayer(marker_23)
+
+var marker_24 = L.marker([37.75817148, -122.46010479]);
+marker_24.bindPopup("kingdom Fungi");
+map.addLayer(marker_24)
+
+var marker_25 = L.marker([37.75887576, -122.45886656]);
+marker_25.bindPopup("kingdom Plantae");
+map.addLayer(marker_25)
+
+var marker_26 = L.marker([37.75989174, -122.45875481]);
+marker_26.bindPopup("genus Myosotis");
+map.addLayer(marker_26)
+
+var marker_27 = L.marker([37.75990333, -122.45873124]);
+marker_27.bindPopup("phylum Bryophyta");
+map.addLayer(marker_27)
+
+var marker_28 = L.marker([37.75984954, -122.45876793]);
+marker_28.bindPopup("phylum Bryophyta");
+map.addLayer(marker_28)
+
+var marker_29 = L.marker([37.76074059, -122.45865191]);
+marker_29.bindPopup("genus Eucalyptus");
+map.addLayer(marker_29)
+
+var marker_30 = L.marker([37.76129334, -122.45919477]);
+marker_30.bindPopup("genus Rubus");
+map.addLayer(marker_30)
+
+var marker_31 = L.marker([37.805871, -122.157187]);
+marker_31.bindPopup("suborder Sauria");
+map.addLayer(marker_31)
+
+var marker_32 = L.marker([37.80626111, -122.15645003]);
+marker_32.bindPopup("kingdom Plantae");
+map.addLayer(marker_32)
+
+var marker_33 = L.marker([37.810834, -122.166785]);
+marker_33.bindPopup("species Daldinia concentrica");
+map.addLayer(marker_33)
+
+var marker_34 = L.marker([37.811141, -122.167739]);
+marker_34.bindPopup("species Lupinus formosus");
+map.addLayer(marker_34)
+
+var marker_35 = L.marker([37.810089, -122.169648]);
+marker_35.bindPopup("kingdom Plantae");
+map.addLayer(marker_35)
+
+var marker_36 = L.marker([37.816874, -122.176727]);
+marker_36.bindPopup("genus Apis");
+map.addLayer(marker_36)
+
+var marker_37 = L.marker([37.81704004, -122.17710951]);
+marker_37.bindPopup("kingdom Plantae");
+map.addLayer(marker_37)
+
+var marker_38 = L.marker([37.81806173, -122.17897711]);
+marker_38.bindPopup("phylum Bryophyta");
+map.addLayer(marker_38)
+
+var marker_39 = L.marker([37.814688, -122.179501]);
+marker_39.bindPopup("genus Cirsium");
+map.addLayer(marker_39)
+
+var marker_40 = L.marker([37.814675, -122.179351]);
+marker_40.bindPopup("phylum Pteridophyta");
+map.addLayer(marker_40)
+
+var marker_41 = L.marker([37.811046, -122.181609]);
+marker_41.bindPopup("species Trametes versicolor");
+map.addLayer(marker_41)
+
+var marker_42 = L.marker([37.722816, -122.464989]);
+marker_42.bindPopup("class Aves");
+map.addLayer(marker_42)
+
+var marker_43 = L.marker([37.757096, -122.461672]);
+marker_43.bindPopup("kingdom Plantae");
+map.addLayer(marker_43)
+
+var marker_44 = L.marker([37.75711607, -122.46067958]);
+marker_44.bindPopup("species Xylaria hypoxylon");
+map.addLayer(marker_44)
+
+var marker_45 = L.marker([37.7570471, -122.461171]);
+marker_45.bindPopup("species Foeniculum vulgare");
+map.addLayer(marker_45)
+
+var marker_46 = L.marker([37.769985, -122.474046]);
+marker_46.bindPopup("order Agaricales");
+map.addLayer(marker_46)
+
+var marker_47 = L.marker([37.75815976, -122.46029986]);
+marker_47.bindPopup("something");
+map.addLayer(marker_47)
+
+var marker_48 = L.marker([37.758752, -122.46062]);
+marker_48.bindPopup("order Agaricales");
+map.addLayer(marker_48)
+
+var marker_49 = L.marker([37.758293, -122.459564]);
+marker_49.bindPopup("genus Myosotis");
+map.addLayer(marker_49)
+
+var marker_50 = L.marker([37.75951338, -122.45928972]);
+marker_50.bindPopup("phylum Pteridophyta");
+map.addLayer(marker_50)
+
+var marker_51 = L.marker([37.75992387, -122.45888042]);
+marker_51.bindPopup("phylum Bryophyta");
+map.addLayer(marker_51)
+
+var marker_52 = L.marker([37.35714682, -122.19286638]);
+marker_52.bindPopup("something");
+map.addLayer(marker_52)
+
+var marker_53 = L.marker([37.357034, -122.190336]);
+marker_53.bindPopup("order Orthoptera");
+map.addLayer(marker_53)
+
+var marker_54 = L.marker([37.35405182, -122.1871773]);
+marker_54.bindPopup("species Sceloporus occidentalis");
+map.addLayer(marker_54)
+
+var marker_55 = L.marker([37.255164, -122.383015]);
+marker_55.bindPopup("species Calisoga longitarsis");
+map.addLayer(marker_55)
+
+var marker_56 = L.marker([37.399971, -122.271181]);
+marker_56.bindPopup("species Omphalotus olivascens");
+map.addLayer(marker_56)
+
+var marker_57 = L.marker([37.399971, -122.271181]);
+marker_57.bindPopup("species Trametes versicolor");
+map.addLayer(marker_57)
+
+var marker_58 = L.marker([37.401471, -122.272382]);
+marker_58.bindPopup("species Tremella aurantia");
+map.addLayer(marker_58)
+
+var marker_59 = L.marker([37.792702, -122.474584]);
+marker_59.bindPopup("genus Ramaria");
+map.addLayer(marker_59)
+
+var marker_60 = L.marker([37.7356666667, -122.4881666667]);
+marker_60.bindPopup("species Tubaria furfuracea");
+map.addLayer(marker_60)
+
+
+
+
+
+
+</script>
+
+</body>
