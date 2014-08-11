@@ -1513,7 +1513,7 @@ table.dataframe th, td {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Fonda and I explored the Redwood Regional Park and geotagged some flora and fauna. This is an example post that just uses an <a href="https://github.com/ipython/ipython">iPython notebook</a>.</p>
+<p>Fonda and I explored the <a href="https://en.wikipedia.org/wiki/Redwood_Regional_Park">Redwood Regional Park</a> and geotagged some flora and fauna. This is an example post that just uses an <a href="https://github.com/ipython/ipython">iPython notebook</a>.</p>
 <p>This post relies on the <a href="https://github.com/danielfrg/pelican-ipynb">pelican-ipynb</a> plugin. Definitely see his notes. Ignore your checkpoints when generating the site with <code>ARTICLE_EXCLUDES = ['.ipynb_checkpoints']</code>.</p>
 <p>I opted for singular files, editing my metadata json. Here's what I put for this post.</p>
 <pre><code>{
@@ -1527,12 +1527,203 @@ table.dataframe th, td {
   "Date": "2014-08-09",
   "Slug": "redwood-regional"
 }
-</code></pre><p>The parameters for the below map are <code>"observed_on": "2014-08-08"</code>, retrieved from <a href="http://www.inaturalist.org/observations/digitalvapor">my</a> and <a href="http://www.inaturalist.org/observations/star_bit">Fonda</a>'s iNaturalist observations by appending <code>.json</code> to the end (<a href="http://www.inaturalist.org/observations/digitalvapor.json">link</a>). See their <a href="http://www.inaturalist.org/pages/api+reference">RESTful API</a>. I set our names in the <code>pelicanconf.py</code> file with <code>NATURALISTS = ['digitalvapor','star_bit']</code></p>
+</code></pre><p>The parameters for the below map are <code>"observed_on": "2014-08-08"</code>, retrieved from <a href="http://www.inaturalist.org/observations/digitalvapor">my</a> and <a href="http://www.inaturalist.org/observations/star_bit">Fonda</a>'s iNaturalist observations by appending <code>.json</code> to the end (<a href="http://www.inaturalist.org/observations/digitalvapor.json">link</a>). See their <a href="http://www.inaturalist.org/pages/api+reference">RESTful API</a>. From an <a href="http://www.inaturalist.org/pages/api+reference#get-observations">observations endpoint</a> you can get 100 results, after that you'll need to authenticate. I set our names in the <code>pelicanconf.py</code> file with <code>NATURALISTS = ['digitalvapor','star_bit']</code></p>
 <ul>
 <li><a href="https://github.com/danielfrg/pelican-ipynb">https://github.com/danielfrg/pelican-ipynb</a></li>
 <li><a href="http://www.inaturalist.org/pages/api+reference">http://www.inaturalist.org/pages/api+reference</a></li>
 <li><a href="http://www.inaturalist.org/observations/digitalvapor.json">http://www.inaturalist.org/observations/digitalvapor.json</a></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In [34]:
+</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="n">date</span> <span class="o">=</span> <span class="s">'2014-08-08'</span>
+<span class="n">usernames</span> <span class="o">=</span> <span class="p">[</span><span class="s">'digitalvapor'</span><span class="p">,</span><span class="s">'star_bit'</span><span class="p">]</span>
+<span class="c">#check if showing map by a day's adventure, if no date then it shows user info</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">date</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">usernames</span><span class="p">:</span>
+        <span class="c">#if no date, just return user info for now</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.inaturalist.org/people/'</span><span class="o">+</span><span class="n">user</span><span class="o">+</span><span class="s">'.json'</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="s">'login'</span><span class="p">,</span><span class="s">'observations_count'</span><span class="p">,</span><span class="s">'identifications_count'</span><span class="p">,</span><span class="s">'id'</span><span class="p">,</span><span class="s">'life_list_taxa_count'</span><span class="p">,</span><span class="s">'user_icon_url'</span><span class="p">]</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'-'</span><span class="p">)</span>
+    <span class="n">filter_payload</span> <span class="o">=</span> <span class="p">{</span><span class="s">'year'</span><span class="p">:</span><span class="n">y</span><span class="p">,</span><span class="s">'month'</span><span class="p">:</span><span class="n">m</span><span class="p">,</span><span class="s">'day'</span><span class="p">:</span><span class="n">d</span><span class="p">}</span>
+    <span class="n">num_markers</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">usernames</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.inaturalist.org/observations/'</span><span class="o">+</span><span class="n">user</span><span class="o">+</span><span class="s">'.json'</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>
+            <span class="c">#creature</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rank</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s">'taxon'</span><span class="p">][</span><span class="s">'rank'</span><span class="p">])</span><span class="o">+</span><span class="s">' '</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">rank</span> <span class="o">=</span> <span class="s">''</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s">'taxon'</span><span class="p">][</span><span class="s">'name'</span><span class="p">])</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="s">'something'</span>
+            <span class="n">creature</span> <span class="o">=</span> <span class="s">'{0}{1}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">creature</span><span class="p">)</span>
+            <span class="c">#geo</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s">'latitude'</span><span class="p">])</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s">'longitude'</span><span class="p">])</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="s">'coords: ({0},{1})'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">num_markers</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">map_rr</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">],</span><span class="n">zoom_start</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+            <span class="n">map_rr</span><span class="o">.</span><span class="n">simple_marker</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">lat</span><span class="p">,</span><span class="n">lon</span><span class="p">],</span><span class="n">popup</span><span class="o">=</span><span class="n">creature</span><span class="p">)</span>
+            
+            <span class="n">num_markers</span> <span class="o">=</span> <span class="n">num_markers</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">path</span><span class="o">=</span><span class="s">'redwood_regional.html'</span>
+    <span class="n">map_rr</span><span class="o">.</span><span class="n">create_map</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+kingdom Plantae
+coords: (-122.15919676,37.80791308)
+species Trametes versicolor
+coords: (-122.16065087,37.80899949)
+species Daldinia concentrica
+coords: (-122.16390046,37.81227659)
+genus Sequoia
+coords: (-122.1675975,37.8115605)
+kingdom Plantae
+coords: (-122.16388486,37.81485911)
+kingdom Plantae
+coords: (-122.16929625,37.80934613)
+genus Equisetum
+coords: (-122.17941475,37.81461048)
+species Daldinia concentrica
+coords: (-122.18101098,37.81244183)
+kingdom Fungi
+coords: (-122.18138613,37.81246302)
+species Toxicodendron diversilobum
+coords: (-122.18207344,37.81009286)
+species Rubus allegheniensis
+coords: (-122.18207772,37.81004987)
+kingdom Plantae
+coords: (-122.4639742,37.76250914)
+kingdom Plantae
+coords: (-122.46370147,37.75917381)
+species Leonotis leonurus
+coords: (-122.46373992,37.75911187)
+species Passiflora coccinea
+coords: (-122.4636808,37.75904009)
+kingdom Plantae
+coords: (-122.46357502,37.75894045)
+kingdom Fungi
+coords: (-122.46059768,37.75714484)
+kingdom Plantae
+coords: (-122.46059653,37.75714644)
+kingdom Plantae
+coords: (-122.46059214,37.75714689)
+species Vinca major
+coords: (-122.46057344,37.75714653)
+kingdom Plantae
+coords: (-122.46003216,37.75713744)
+kingdom Fungi
+coords: (-122.46008505,37.75815047)
+kingdom Fungi
+coords: (-122.45987748,37.75812609)
+kingdom Fungi
+coords: (-122.46010479,37.75817148)
+kingdom Plantae
+coords: (-122.45886656,37.75887576)
+genus Myosotis
+coords: (-122.45875481,37.75989174)
+phylum Bryophyta
+coords: (-122.45873124,37.75990333)
+phylum Bryophyta
+coords: (-122.45876793,37.75984954)
+genus Eucalyptus
+coords: (-122.45865191,37.76074059)
+genus Rubus
+coords: (-122.45919477,37.76129334)
+suborder Sauria
+coords: (-122.157187,37.805871)
+kingdom Plantae
+coords: (-122.15645003,37.80626111)
+species Daldinia concentrica
+coords: (-122.166785,37.810834)
+species Lupinus formosus
+coords: (-122.167739,37.811141)
+kingdom Plantae
+coords: (-122.169648,37.810089)
+genus Apis
+coords: (-122.176727,37.816874)
+kingdom Plantae
+coords: (-122.17710951,37.81704004)
+phylum Bryophyta
+coords: (-122.17897711,37.81806173)
+genus Cirsium
+coords: (-122.179501,37.814688)
+phylum Pteridophyta
+coords: (-122.179351,37.814675)
+species Trametes versicolor
+coords: (-122.181609,37.811046)
+class Aves
+coords: (-122.464989,37.722816)
+kingdom Plantae
+coords: (-122.461672,37.757096)
+species Xylaria hypoxylon
+coords: (-122.46067958,37.75711607)
+species Foeniculum vulgare
+coords: (-122.461171,37.7570471)
+order Agaricales
+coords: (-122.474046,37.769985)
+something
+coords: (-122.46029986,37.75815976)
+order Agaricales
+coords: (-122.46062,37.758752)
+genus Myosotis
+coords: (-122.459564,37.758293)
+phylum Pteridophyta
+coords: (-122.45928972,37.75951338)
+phylum Bryophyta
+coords: (-122.45888042,37.75992387)
+something
+coords: (-122.19286638,37.35714682)
+order Orthoptera
+coords: (-122.190336,37.357034)
+species Sceloporus occidentalis
+coords: (-122.1871773,37.35405182)
+species Calisoga longitarsis
+coords: (-122.383015,37.255164)
+species Omphalotus olivascens
+coords: (-122.271181,37.399971)
+species Trametes versicolor
+coords: (-122.271181,37.399971)
+species Tremella aurantia
+coords: (-122.272382,37.401471)
+genus Ramaria
+coords: (-122.474584,37.792702)
+species Tubaria furfuracea
+coords: (-122.4881666667,37.7356666667)
+
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
