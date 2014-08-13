@@ -36,6 +36,7 @@ PATH = 'content'
 OUTPUT_PATH = 'output'
 PLUGIN_PATH = 'plugins'
 PLUGINS = ['assets','pelican-ipynb']
+STATIC_PATHS = ['images']
 THEME = 'themes/burrito'
 WEBASSETS = True
 
